@@ -21,8 +21,8 @@ class Quarto_Cat(models.Model):
 class Quartos (models.Model):
     num_Quarto=models.IntegerField(default=0)
     fktipo_Quarto=models.ForeignKey(Quarto_Cat,null=True,on_delete=models.SET_NULL)
-    def __int__(self):
-        return self.num_Quarto
+    def __str__(self):
+        return 'Quarto nº'+str(self.num_Quarto)
 
 class Ocupacao(models.Model):
     data_ini=models.DateTimeField()
