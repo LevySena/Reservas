@@ -6,14 +6,27 @@
     <title>Tela de Reservas</title>
 </head>
 <body>
+    {% url 'cadastro' as cad %}
+    <a href={{cad}}><button>CADASTRAR CLIENTE</button></a>
     <table border="1">
-        <tr>
-        </tr>
-        {% for r in room %}
-        <tr>
-            <th>{{r.num_Quarto}}</th>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th></th>
+                {% for dia in dias %}
+                <th>{{dia.day}}/{{dia.month}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in room %}
+            <tr>
+                <th>{{r.num_Quarto}}</th>
+                {% for dia in dias %}
+                <td></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
 
 
 
