@@ -2,14 +2,15 @@ from django.shortcuts import render,redirect
 from django.http import HttpRequest
 from main.models import Quartos,Ocupacao
 from datetime import datetime,timedelta
+from django.utils import timezone
 from main.forms import *
 from main.models import *
 
 def Reservas(request):
     today=datetime.now()
-    period=[today+timedelta(days=x) for x in range(90)]
-    quarto=Quartos.objects.all
-    ocupacao=Ocupacao.objects.all
+    period=[timezone.make_aware(today+timedelta(days=x)) for x in range(90)]
+    quarto=Quartos.objects.all()
+    ocupacao=Ocupacao.objects.all()
     contexto={
         'room':quarto,
         'ocup':ocupacao,

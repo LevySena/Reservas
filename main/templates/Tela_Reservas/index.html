@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Reservas</title>
+   
 </head>
 <body>
+    {% load tagextra %}
     {% url 'cadastro' as cad %}
     <a href={{cad}}><button>CADASTRAR CLIENTE</button></a>
     <table border="1">
@@ -22,12 +24,19 @@
             <tr>
                 <th>{{r.num_Quarto}}</th>
                 {% for dia in dias %}
-                <td></td>
+                <td>
+                    {% if r.ocupacao_set.all %}
+                        {% for oc in r.ocupacao_set.all  %}
+                            {% if dia|checkin:oc %}
+                                X
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
                 {% endfor %}
             </tr>
             {% endfor %}
         </tbody>
-
 
 
     </table>
