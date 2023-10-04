@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     {% load static %}
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,11 @@
     {% url 'cadastro' as cad %}
 
     <div class="Bota">
-        <a href={{cad}}><button class="btn btn-primary">CADASTRAR CLIENTE</button></a>
+        <div class="Bus">
+            <div><a href={{cad}}><button class="btn btn-primary">CADASTRAR CLIENTE</button></a></div>
+            <div><button class="btn btn-primary">LIMPAR</button></div>
+        </div>
+        <div class="Legends">AQUI VAI AS LEGENDAS</div>
     </div>
 
     <div class="table-responsive">

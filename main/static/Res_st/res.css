@@ -5,8 +5,20 @@
 }
 .Bota{
     display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 3px solid red;
+}
+.Bus{
+    display: flex;
     justify-content: center;
-    padding: 50px;
-
-
+    border: 3px solid blue;
+    align-items: center;
+    flex-direction: column;
+}
+.Legends{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border: 3px solid green;
 }
