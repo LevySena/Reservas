@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Reservas</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'Res_st/res.css' %}">
-   
+
 </head>
+
 <body>
     {% load tagextra %}
     {% url 'cadastro' as cad %}
+    {% url 'apagar' as del %}
 
     <div class="Bota">
         <div class="Bus">
             <div><a href={{cad}}><button class="btn btn-primary">CADASTRAR CLIENTE</button></a></div>
-            <div><button class="btn btn-primary">LIMPAR</button></div>
+            <div><a href="{{del}}"><button class="btn btn-primary">LIMPAR</button></a></div>
         </div>
         <div class="Legends">AQUI VAI AS LEGENDAS</div>
     </div>
 
+
     <div class="table-responsive">
-        <table border="1" class="table table-striped">
-            <thead class="thead-dark">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th></th>
                     {% for dia in dias %}
@@ -38,11 +43,27 @@
                     {% for dia in dias %}
                     <td>
                         {% if r.ocupacao_set.all %}
-                            {% for oc in r.ocupacao_set.all  %}
-                                {% if dia|checkin:oc %}
-                                    X
-                                {% endif %}
-                            {% endfor %}
+                        {% for oc in r.ocupacao_set.all %}
+                        {% if dia|checkin:oc %}
+
+                        {% if oc.fk_tipooccup.tipo_occup == 'Reservado' %}
+                        <button class="Bola" data-bs-toggle="modal" data-bs-target="#mymodal"
+                            data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
+                            data-bs-st="{{oc.fk_tipooccup}}" data-bs-quarto="{{r.fk_tipoQuarto}}" data-bs-id="{{oc.fk_cliente.id}}"></button>
+
+                        {% elif oc.fk_tipooccup.tipo_occup == 'Pre-reservado' %}
+                        <button class="Bola2" data-bs-toggle="modal" data-bs-target="#mymodal"
+                            data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
+                            data-bs-st="{{oc.fk_tipooccup}}"></button>
+
+                        {% else %}
+                        <button class="Bola3" data-bs-toggle="modal" data-bs-target="#mymodal"
+                            data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
+                            data-bs-st="{{oc.fk_tipooccup}}"></button>
+
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -52,8 +73,39 @@
         </table>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <div class="modal fade" id="mymodal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Null</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tele">
+                        null
+                    </div>
+                    <div class="status">
+                        null
+                    </div>
+                    <div class="quarto">
+                        null
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" id="del">Deletar</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'Res_st/res.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
 </body>
 </html>

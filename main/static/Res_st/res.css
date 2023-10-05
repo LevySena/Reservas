@@ -22,3 +22,21 @@
     padding: 20px;
     border: 3px solid green;
 }
+.Bola{
+    display: inline-block;
+    width: 43px;
+    height: 28px;
+    background-color: rgb(0, 136, 255);
+}
+.Bola2{
+    display: inline-block;
+    width: 43px;
+    height: 28px;
+    background-color: rgb(244, 244, 130);
+}
+.Bola3{
+    display: inline-block;
+    width: 43px;
+    height: 28px;
+    background-color: rgb(255, 64, 64);
+}

@@ -48,3 +48,15 @@ def CadFinal(request):
             novo.save()
             return redirect(Reservas)
     return render(request,"CadastroCliente/CadReserv.html",context=contexto)
+
+def Limpar_Table(request):
+    Banco = Cliente.objects.all()
+    for i in Banco:
+        i.delete()
+    return redirect(Reservas)
+
+def Limpar_ind(request,id):
+    individuo = Cliente.objects.get(pk=id)
+    individuo.delete()
+    return redirect(Reservas)
+        
