@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    {% load static %}
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente</title>
+    <title>Atualizando Cliente</title>
+    <link rel="stylesheet" href="{% static 'Upd_st/upd.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'Cad_st/cad.css' %}">
 </head>
 <body>
-    {% url 'reservas' as reserv %}
     <div class="main">
         <form action="" method="post">
             <div class="formu">
             {% csrf_token %}
-            <h3>Nome do Cliente</h3>
-            {{form.nome}}
-            <h3>Telefone/Cell</h3>
-            {{form.telefone}}
-            <button type="submit" class="btn btn-primary">CADASTRAR</button>
-        </div>
+            {% for field in form %}
+                {{field}}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            </div>
         </form>
-        <a href={{reserv}}><button class="btn btn-primary">VOLTAR</button></a>
+
     </div>
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

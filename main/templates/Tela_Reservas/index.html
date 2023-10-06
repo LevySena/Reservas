@@ -41,7 +41,7 @@
                 <tr>
                     <th>{{r.num_Quarto}}</th>
                     {% for dia in dias %}
-                    <td>
+                    <td class="datatable">
                         {% if r.ocupacao_set.all %}
                         {% for oc in r.ocupacao_set.all %}
                         {% if dia|checkin:oc %}
@@ -49,23 +49,29 @@
                         {% if oc.fk_tipooccup.tipo_occup == 'Reservado' %}
                         <button class="Bola" data-bs-toggle="modal" data-bs-target="#mymodal"
                             data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
-                            data-bs-st="{{oc.fk_tipooccup}}" data-bs-quarto="{{r.fk_tipoQuarto}}" data-bs-id="{{oc.fk_cliente.id}}"></button>
+                            data-bs-st="{{oc.fk_tipooccup}}" data-bs-quarto="{{r.fk_tipoQuarto}}" data-bs-id="{{oc.id}}"
+                            data-bs-clid="{{oc.fk_cliente.id}}"></button>
 
                         {% elif oc.fk_tipooccup.tipo_occup == 'Pre-reservado' %}
                         <button class="Bola2" data-bs-toggle="modal" data-bs-target="#mymodal"
                             data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
-                            data-bs-st="{{oc.fk_tipooccup}}"></button>
+                            data-bs-st="{{oc.fk_tipooccup}}" data-bs-quarto="{{r.fk_tipoQuarto}}"
+                            data-bs-id="{{oc.id}}" data-bs-clid="{{oc.fk_cliente.id}}"></button>
+
 
                         {% else %}
                         <button class="Bola3" data-bs-toggle="modal" data-bs-target="#mymodal"
                             data-bs-cli="{{oc.fk_cliente}}" data-bs-num="{{oc.fk_cliente.telefone}}"
-                            data-bs-st="{{oc.fk_tipooccup}}"></button>
+                            data-bs-st="{{oc.fk_tipooccup}}" data-bs-quarto="{{r.fk_tipoQuarto}}"
+                            data-bs-id="{{oc.id}}" data-bs-clid="{{oc.fk_cliente.id}}"></button>
+
 
                         {% endif %}
                         {% endif %}
                         {% endfor %}
                         {% endif %}
                     </td>
+                </div>
                     {% endfor %}
                 </tr>
                 {% endfor %}
@@ -93,6 +99,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a id="update"><button class="btn btn-primary" type="button">Atualizar</button></a>
                     <a class="btn btn-danger" id="del">Deletar</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
@@ -108,4 +115,5 @@
 
 
 </body>
+
 </html>

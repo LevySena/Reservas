@@ -49,6 +49,20 @@ def CadFinal(request):
             return redirect(Reservas)
     return render(request,"CadastroCliente/CadReserv.html",context=contexto)
 
+def Atualizar(request,id):
+    instance = Ocupacao.objects.get(fk_cliente=id)
+    formulario=UpcliForm(instance=instance)
+    if request.method == 'POST':
+        formulario = UpcliForm(request.POST, instance=instance)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(Reservas)
+    contexto = {
+        'form' : formulario,
+    }
+    return render(request,"UpdCliente/clienteUpdate.html", context=contexto)
+
+
 def Limpar_Table(request):
     Banco = Cliente.objects.all()
     for i in Banco:
@@ -56,7 +70,7 @@ def Limpar_Table(request):
     return redirect(Reservas)
 
 def Limpar_ind(request,id):
-    individuo = Cliente.objects.get(pk=id)
+    individuo = Ocupacao.objects.get(pk=id)
     individuo.delete()
     return redirect(Reservas)
         
