@@ -50,6 +50,10 @@ def CadFinal(request):
     return render(request,"CadastroCliente/CadReserv.html",context=contexto)
 
 def Atualizar(request,id):
+    verify=Ocupacao.objects.filter(fk_cliente=id)
+    if not verify:
+        request.session["id"]=id
+        return redirect(CadFinal)
     instance = Ocupacao.objects.get(fk_cliente=id)
     formulario=UpcliForm(instance=instance)
     if request.method == 'POST':
@@ -74,3 +78,9 @@ def Limpar_ind(request,id):
     individuo.delete()
     return redirect(Reservas)
         
+def Listar_Cli(request):
+    individuo = Cliente.objects.all()
+    contexto={
+        'pessoas' : individuo,
+    }
+    return render(request,"UpdCliente/listCliente.html",context=contexto)

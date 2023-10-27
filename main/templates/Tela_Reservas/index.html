@@ -16,13 +16,15 @@
     {% load tagextra %}
     {% url 'cadastro' as cad %}
     {% url 'apagar' as del %}
+    {% url 'list' as list %}
 
     <div class="Bota">
         <div class="Bus">
             <div><a href={{cad}}><button class="btn btn-primary">CADASTRAR CLIENTE</button></a></div>
-            <div><a href="{{del}}"><button class="btn btn-primary">LIMPAR</button></a></div>
+            <div><a href={{del}}><button class="btn btn-primary">LIMPAR</button></a></div>
+            <div><a href={{list}}><button class="btn btn-primary">LISTAR CLIENTES</button></a></div>
         </div>
-        <div class="Legends">AQUI VAI AS LEGENDAS</div>
+        <div class="Legends"><img class="Resol" src="{% static 'Res_st/Legendas.png' %}"></div>
     </div>
 
 

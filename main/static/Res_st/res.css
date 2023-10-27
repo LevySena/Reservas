@@ -2,25 +2,29 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
 }
 .Bota{
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    border: 3px solid red;
+    background-color: #eefcf7;
 }
 .Bus{
     display: flex;
     justify-content: center;
-    border: 3px solid blue;
     align-items: center;
     flex-direction: column;
+    gap: 3px;
 }
 .Legends{
     display: flex;
     justify-content: center;
-    padding: 20px;
-    border: 3px solid green;
+    padding: 0;
+}
+.Resol{
+    width: 400px;
+    height: 100px;
 }
 .table > :not(caption) > * > td{
     padding: 0px;
